@@ -9,7 +9,6 @@ Danny has shared with you 3 key datasets for this case study :
 - `menu`
 - `members`
 <br/>
-<br/>
 
 ## Case Study Questions
 
@@ -29,4 +28,53 @@ GROUP BY s.customer_id;
 |      A       |    76       |
 |      B       |    74       |
 |      C       |    36       |
+
+## [Question #2](#case-study-questions)
+> How many days has each customer visited the restaurant?
+```sql
+SELECT 
+	customer_id,
+	COUNT(DISTINCT order_date) AS Customer_Visit
+FROM dannys_diner.sales
+GROUP BY customer_id;
+```
+| customer_id  | Customer_Visit |
+|--------------|----------------|
+|      A       |        4       |
+|      B       |        6       |
+|      C       |        2       |
+
+## [Question #3](#case-study-questions)
+> What was the first item(s) from the menu purchased by each customer?
+```sql
+SELECT
+	T.customer_id,
+	T.product_name
+FROM
+(
+	SELECT
+		s.customer_id,
+		m.product_name,
+		RANK() OVER (PARTITION BY s.customer_id ORDER BY s.order_date ASC) AS rn
+	FROM dannys_diner.sales s
+	INNER JOIN dannys_diner.menu m
+		ON s.product_id = m.product_id
+) AS T
+WHERE T.rn = 1;
+```
+| customer_id  |  product_name  |
+|--------------|----------------|
+|      A       |     sushi      |
+|      A       |     curry      |
+|      B       |     curry      |
+|      c       |     ramen      |
+|      c       |     ramen      |
+
+
+
+
+
+
+
+
 
