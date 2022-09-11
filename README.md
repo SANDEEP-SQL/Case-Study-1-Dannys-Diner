@@ -16,14 +16,13 @@ Danny has shared with you 3 key datasets for this case study :
 ## [Question #1](#case-study-questions)
 > What is the total amount each customer spent at the restaurant?
 ```sql
--- Use dannys_diner schema
-select
-  s.customer_id,
-	SUM(m.price) as total_sales
-from dannys_diner.sales s
-inner join dannys_diner.menu m
-	on s.product_id = m.product_id
-group by s.customer_id;
+SELECT
+	s.customer_id,
+	SUM(m.price) AS total_sales
+FROM dannys_diner.sales s
+INNER JOIN dannys_diner.menu m
+	ON s.product_id = m.product_id
+GROUP BY s.customer_id;
 ```
 | customer_id  | total_sales |
 |--------------|-------------|
