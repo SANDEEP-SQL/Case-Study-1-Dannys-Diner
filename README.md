@@ -87,4 +87,38 @@ ORDER BY purchased DESC;
 |-------------- |--------------|
 |      ramen    |     8        |
 
+## [Question #5](#case-study-questions)
+> Which item(s) was the most popular for each customer?
+```sql
+SELECT
+	t.customer_id,
+	t.product_name,
+	t.item_quantity
+FROM 
+(
+	SELECT
+		s.customer_id,
+		m.product_name,
+		COUNT(1) as item_quantity,
+		DENSE_RANK() OVER ( PARTITION BY s.customer_id ORDER BY COUNT(1) DESC) AS RN
+	FROM dannys_diner.sales s
+	INNER JOIN dannys_diner.menu m
+	on s.product_id = m.product_id
+	GROUP BY S.customer_id,m.product_name
+) AS T
+WHERE T.RN = 1;
+```
+| customer_id | product_name | item_quantity |
+|-------------|--------------|---------------|
+|      A      |     ramen    |      3        |
+|      B      |     sushy    |      2        |
+|      B      |     curry    |      2        |
+|      B      |     ramen    |      2        |
+|      C      |     ramen    |      3        |
+
+
+
+
+
+
 
