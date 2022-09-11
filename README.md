@@ -70,11 +70,21 @@ WHERE T.rn = 1;
 |      c       |     ramen      |
 |      c       |     ramen      |
 
-
-
-
-
-
-
+## [Question #4](#case-study-questions)
+> What is the most purchased item on the menu and how many times was it purchased by all customers?
+```sql
+SELECT
+	TOP 1
+	m.product_name,
+	COUNT(s.product_id) AS purchased
+FROM dannys_diner.sales s
+INNER JOIN dannys_diner.menu m
+	ON s.product_id = m.product_id
+GROUP BY m.product_name
+ORDER BY purchased DESC;
+```
+| product_name  |  purchased   |
+|-------------- |--------------|
+|      ramen    |     8        |
 
 
