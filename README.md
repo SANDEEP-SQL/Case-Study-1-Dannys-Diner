@@ -116,9 +116,34 @@ WHERE T.RN = 1;
 |      B      |     ramen    |      2        |
 |      C      |     ramen    |      3        |
 
-
-
-
+## [Question #6](#case-study-questions)
+> Which item was purchased first by the customer after they became a member and what date was it? (including the date they joined)
+```sql
+WITH CTE AS
+(
+SELECT
+s.customer_id,
+s.order_date,
+FIRST_VALUE(m.product_name) OVER (PARTITION BY S.customer_id ORDER BY s.order_date ASC) AS first_product_name,
+DENSE_RANK() OVER (PARTITION BY S.customer_id ORDER BY s.order_date asc) AS RN
+FROM dannys_diner.sales S
+INNER JOIN dannys_diner.members MB
+	ON S.customer_id = MB.customer_id
+INNER JOIN dannys_diner.menu M
+	ON S.product_id = M.product_id
+WHERE S.order_date >= MB.join_date
+)
+	SELECT
+		CTE.CUSTOMER_ID,
+		CTE.ORDER_DATE,
+		CTE.FIRST_PRODUCT_NAME
+	FROM CTE
+	WHERE CTE.RN = 1
+```
+| customer_id | order_date   | product_name  |
+|-------------|--------------|---------------|
+|      A      |2021-01-07    |      curry    |
+|      B      |2021-01-11    |      sushy    |
 
 
 
