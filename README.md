@@ -119,7 +119,7 @@ WHERE T.RN = 1;
 ## [Question #6](#case-study-questions)
 > Which item was purchased first by the customer after they became a member and what date was it? (including the date they joined)
 ```sql
-;WITH CTE AS
+WITH CTE AS
 (
 SELECT
 s.customer_id,
