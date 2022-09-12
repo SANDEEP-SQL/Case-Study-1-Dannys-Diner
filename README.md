@@ -287,3 +287,6 @@ INNER JOIN dannys_diner.members MB
 INNER JOIN dannys_diner.menu M
 	ON S.product_id = M.product_id;
 ```
+![image](https://user-images.githubusercontent.com/81180156/189626227-29fdd60e-f224-4333-915b-777e0df8d8b6.png)
+
+
