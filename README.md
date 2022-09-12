@@ -210,7 +210,7 @@ SELECT
 	SUM(CASE 
 		WHEN M.product_name = 'sushi' THEN M.price * 10 * 2
 		ELSE M.price * 10 * 1
-		END 
+	    END 
 	   ) AS points
 FROM dannys_diner.sales S
 INNER JOIN dannys_diner.menu M
@@ -222,3 +222,12 @@ GROUP BY S.customer_id
 |      A        |     860  |
 |      B        |     940  |
 |      C        |     360  |
+
+## [Question #10](#case-study-questions)
+> In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+
+This is an extension of the previous question with a modifier to make it more difficult!
+
+How will you manage to look at the join date and the week after? Be careful of the date boundaries used throughout this SQL query - you may need to change a few different dates below!
+```sql
+```
