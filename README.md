@@ -271,6 +271,19 @@ WHERE S.order_date <= '2021-01-31'
 
 The trick for this question is to try and understand what is going on from the results and work backwards - something that we’ve covered in a ton of depth throughout the 2 extended case studies already in this course!
 
-If we view that last 'member' column - we can see that there is `N' and `Y' values for each customer. What might this relate to? Does it have something with each customer’s join date?
+If we view that last `member` column - we can see that there is `N` and `Y` values for each customer. What might this relate to? Does it have something with each customer’s join date?
 
 Additionally - be sure to check the order of this table - what do you notice about the sorting of rows?
+```sql
+SELECT 
+	s.customer_id,
+	s.order_date,
+	m.product_name,
+	m.price,
+	CASE WHEN mb.join_date >= s.order_date THEN 'Y' ELSE 'N' END AS member
+FROM dannys_diner.sales S
+INNER JOIN dannys_diner.members MB
+	ON S.customer_id = MB.customer_id
+INNER JOIN dannys_diner.menu M
+	ON S.product_id = M.product_id;
+```
