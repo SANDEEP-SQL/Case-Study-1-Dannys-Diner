@@ -262,3 +262,15 @@ WHERE S.order_date <= '2021-01-31'
 |-------------- |---------|
 |      A        |   1370  |
 |      B        |    820  |
+
+
+## Bonus Questions
+
+## [Question #11](#case-study-questions)
+> Danny and his team can use to quickly derive insights without needing to join the underlying tables using SQL Recreate the following table output using the available data.
+
+The trick for this question is to try and understand what is going on from the results and work backwards - something that we’ve covered in a ton of depth throughout the 2 extended case studies already in this course!
+
+If we view that last 'member' column - we can see that there is `N' and `Y' values for each customer. What might this relate to? Does it have something with each customer’s join date?
+
+Additionally - be sure to check the order of this table - what do you notice about the sorting of rows?
