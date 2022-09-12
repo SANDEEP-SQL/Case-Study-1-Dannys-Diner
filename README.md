@@ -147,6 +147,7 @@ WHERE S.order_date >= MB.join_date
 
 ## [Question #7](#case-study-questions)
 > Which menu item(s) was purchased just before the customer became a member and when?
+
 This is very similar to question 6 previously but now the record orders should be reversed using the window functions.
 ```sql
 WITH CTE AS
@@ -176,3 +177,30 @@ WHERE S.order_date < MB.join_date
 |      A      |2021-01-01    |      sushi    |
 |      A      |2021-01-01    |      curry    |
 |      B      |2021-01-04    |      sushi    |
+
+## [Question #8](#case-study-questions)
+> What is the number of unique menu items and total amount spent for each member before they became a member?
+
+We can use a similar approach to the previous 2 questions but this time we might not need to look at the window functions!
+```sql
+SELECT
+	S.customer_id,
+	COUNT(DISTINCT M.product_name) AS unique_menu_items,
+	SUM(m.price) AS total_spends
+FROM dannys_diner.sales S
+INNER JOIN dannys_diner.members MB
+	ON S.customer_id = MB.customer_id
+INNER JOIN dannys_diner.menu M
+	ON S.product_id = M.product_id
+WHERE S.order_date < MB.join_date
+GROUP BY S.customer_id
+```
+| customer_id | unique_menu_items | total_spends |
+|-------------|-------------------|--------------|
+|      A      |        2          |      25      |
+|      B      |        2          |      40      |
+
+## [Question #9](#case-study-questions)
+> If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+
+We will need to use a `CASE WHEN` statement for this question to figure out when there is a sushi item purchased - then we can aggregate the points altogether for each customer using a `GROUP BY`
