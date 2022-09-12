@@ -287,6 +287,43 @@ INNER JOIN dannys_diner.members MB
 INNER JOIN dannys_diner.menu M
 	ON S.product_id = M.product_id;
 ```
-![image](https://user-images.githubusercontent.com/81180156/189626227-29fdd60e-f224-4333-915b-777e0df8d8b6.png)
+![image](https://github.com/Shailesh-python/Case_Study_1_Dannys_Diner/blob/main/Question_11.jpg)
 
+## [Question #12](#case-study-questions)
+> Danny also requires further information about the `ranking` of customer products, but he purposely does not need the `ranking` for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
 
+This final question is actually slightly difficult so be sure to take this one slowly!
+
+This was based off a real work problem I was helping one of my mentees with - so it’s really safe to say that these types of problems really do occur at work!
+
+The first thing to note is how similar this table is to the output from question 11.
+
+The next thing is to try and understand why there are `null` values for the `ranking` column - do you notice how they all seem to line up with the `member` column values?
+
+This scenario should instantly scream `CASE WHEN` at you once you’ve seen this a few times in the wild - but how do we perform this operation with some sort of ordering window function?
+
+Also take special note of the largest values for the ranking column - this has a huge impact on which specific ordering window function to use. Remember the differences between `RANK`, `ROW_NUMBER` and `DENSE_RANK` - which one should we use in this situation?
+```sql
+WITH CTE AS
+(
+SELECT
+	s.customer_id,
+	s.order_date,
+	mn.product_name,
+	mn.price,
+	IIF(s.order_date >= mb.join_date,'Y','N') AS member
+FROM dannys_diner.sales s 
+LEFT JOIN dannys_diner.members mb
+	ON s.customer_id = mb.customer_id
+LEFT JOIN dannys_diner.menu mn
+	ON s.product_id = mn.product_id
+)
+	SELECT 
+		*,
+		CASE
+			WHEN member = 'N' THEN Null
+			ELSE RANK() Over (PARTITION BY CTE.customer_id, CTE.member ORDER BY CTE.Price DESC, order_date ) 
+		END AS ranking
+	FROM CTE
+```
+![image](https://github.com/Shailesh-python/Case_Study_1_Dannys_Diner/blob/main/Question_12.jpg)
