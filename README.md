@@ -111,7 +111,7 @@ WHERE T.RN = 1;
 | customer_id | product_name | item_quantity |
 |-------------|--------------|---------------|
 |      A      |     ramen    |      3        |
-|      B      |     sushy    |      2        |
+|      B      |     sushi    |      2        |
 |      B      |     curry    |      2        |
 |      B      |     ramen    |      2        |
 |      C      |     ramen    |      3        |
@@ -143,4 +143,36 @@ WHERE S.order_date >= MB.join_date
 | customer_id | order_date   | product_name  |
 |-------------|--------------|---------------|
 |      A      |2021-01-07    |      curry    |
-|      B      |2021-01-11    |      sushy    |
+|      B      |2021-01-11    |      sushi    |
+
+## [Question #7](#case-study-questions)
+> Which menu item(s) was purchased just before the customer became a member and when?
+This is very similar to question 6 previously but now the record orders should be reversed using the window functions.
+```sql
+WITH CTE AS
+(
+SELECT
+	S.customer_id,
+	S.order_date,
+	S.product_id,
+	M.product_name,
+	DENSE_RANK() OVER (PARTITION BY s.customer_id ORDER BY s.order_date DESC) AS RN
+FROM dannys_diner.sales S
+INNER JOIN dannys_diner.members MB
+	ON S.customer_id = MB.customer_id
+INNER JOIN dannys_diner.menu M
+	ON S.product_id = M.product_id
+WHERE S.order_date < MB.join_date
+)
+	SELECT
+		CTE.CUSTOMER_ID,
+		CTE.ORDER_DATE,
+		CTE.PRODUCT_NAME
+	FROM CTE
+	WHERE CTE.RN = 1;
+```
+| customer_id | order_date   | product_name  |
+|-------------|--------------|---------------|
+|      A      |2021-01-01    |      sushi    |
+|      A      |2021-01-01    |      curry    |
+|      B      |2021-01-04    |      sushi    |
