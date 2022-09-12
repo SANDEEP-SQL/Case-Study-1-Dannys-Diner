@@ -230,4 +230,35 @@ This is an extension of the previous question with a modifier to make it more di
 
 How will you manage to look at the join date and the week after? Be careful of the date boundaries used throughout this SQL query - you may need to change a few different dates below!
 ```sql
+WITH CTE AS
+(
+SELECT
+	S.customer_id,
+	S.order_date,
+	mb.join_date,
+	DATEADD(DD, 6, mb.join_date) AS next_week,
+	M.product_name,
+	M.price
+FROM dannys_diner.sales S
+INNER JOIN dannys_diner.members MB
+	ON S.customer_id = MB.customer_id
+INNER JOIN dannys_diner.menu M
+	ON S.product_id = M.product_id
+WHERE S.order_date <= '2021-01-31'
+)
+	SELECT
+		CTE.customer_id,
+		SUM(CASE
+			WHEN CTE.order_date BETWEEN CTE.join_date AND CTE.next_week 
+				THEN CTE.price * 2 * 10
+			WHEN CTE.product_name = 'sushi' THEN CTE.price * 2 * 10
+			ELSE CTE.price * 1 * 10
+		    END
+			) AS points
+	FROM CTE 
+	GROUP BY CTE.customer_id
 ```
+| customer_id   |  points |
+|-------------- |---------|
+|      A        |   1370  |
+|      B        |    820  |
