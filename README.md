@@ -4,7 +4,7 @@ The following are my solutions to the Case Study 1 Danny's Diner questions in
 <br/>
 <br/>
 Danny has shared with you 3 key datasets for this case study :
-[Data Set](https://www.datawithdanny.com/ "Data With Danny")
+[Data Set](https://github.com/Shailesh-python/Case_Study_1_Dannys_Diner/blob/main/Data%20And%20Tables)
 <br/>
 - `sales`
 - `menu`
