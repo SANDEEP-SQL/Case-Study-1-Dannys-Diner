@@ -1,5 +1,7 @@
 # Case-Study 1 Danny's Diner
-The following are my solutions to the Case Study 1 Danny's Diner questions in 
+
+![image](https://github.com/Shailesh-python/Case_Study_1_Dannys_Diner/blob/main/Dannys%20Diner.png)
+
 [Danny Ma's Serious SQL course](https://www.datawithdanny.com/ "Data With Danny")
 <br/>
 <br/>
