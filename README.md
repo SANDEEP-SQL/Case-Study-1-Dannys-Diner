@@ -2,6 +2,7 @@
 
 ![image](https://github.com/Shailesh-python/Case_Study_1_Dannys_Diner/blob/main/Dannys%20Diner.png)
 
+The following are my solutions to the Case Study 2 Pizza Runner questions in 
 [Danny Ma's Serious SQL course](https://www.datawithdanny.com/ "Data With Danny")
 <br/>
 <br/>
