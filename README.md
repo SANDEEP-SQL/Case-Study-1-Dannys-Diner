@@ -1,6 +1,5 @@
 # Case-Study 1 Danny's Diner
-
-![image](https://github.com/Shailesh-python/Case_Study_1_Dannys_Diner/blob/main/Dannys%20Diner.png)
+<img src='https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)'/>
 
 The following are my solutions to the Case Study 2 Pizza Runner questions in 
 [Danny Ma's Serious SQL course](https://www.datawithdanny.com/ "Data With Danny")
@@ -12,7 +11,6 @@ Danny has shared with you 3 key datasets for this case study :
 - `sales`
 - `menu`
 - `members`
-<br/>
 
 ## Case Study Questions
 
