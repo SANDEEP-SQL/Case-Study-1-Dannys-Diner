@@ -289,7 +289,7 @@ INNER JOIN dannys_diner.members MB
 INNER JOIN dannys_diner.menu M
 	ON S.product_id = M.product_id;
 ```
-![image](https://github.com/Shailesh-python/Case_Study_1_Dannys_Diner/blob/main/Question_11.jpg)
+![image](https://user-images.githubusercontent.com/81180156/191242654-54dc1fa5-f546-46fd-bf49-3ec71b3b811b.png)
 
 ## [Question #12](#case-study-questions)
 > Danny also requires further information about the `ranking` of customer products, but he purposely does not need the `ranking` for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
@@ -328,4 +328,4 @@ LEFT JOIN dannys_diner.menu mn
 		END AS ranking
 	FROM CTE
 ```
-![image](https://github.com/Shailesh-python/Case_Study_1_Dannys_Diner/blob/main/Question_12.jpg)
+![image](https://user-images.githubusercontent.com/81180156/191242816-65a9d008-06ad-4e0b-b193-e73c560476bd.png)
