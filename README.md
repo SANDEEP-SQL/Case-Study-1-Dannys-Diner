@@ -3,7 +3,7 @@
 
 ![image](https://github.com/Shailesh-python/Case-Study-1-Dannys-Diner/blob/main/Dannys%20Diner.png)
 
-The following are my solutions to the Case Study 2 Pizza Runner questions in 
+The following are my solutions to the Case Study 1 Danny's Diner questions in 
 [Danny Ma's Serious SQL course](https://www.datawithdanny.com/ "Data With Danny")
 <br/>
 <br/>
